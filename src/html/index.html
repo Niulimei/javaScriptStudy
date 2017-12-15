@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>studyJavaScript</title>
+  <style>
+    body,
+    div,
+    dl,
+    dt,
+    dd {
+      margin: 0;
+      padding: 0;
+    }
+
+    a:link,
+    a:visited {
+      color: #FFF;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    #header {
+      text-align: center;
+      padding: 40px;
+      font-size: 3em;
+    }
+
+    #wrap {
+      width: 350px;
+      background: #FFF;
+      border: 12px solid #EEE;
+      border-radius: 10px;
+      margin: 10px auto 0;
+      padding: 5px 5px 4px;
+    }
+
+    #wrap dl {
+      color: #FFF;
+      overflow: hidden;
+      background: #7CF;
+    }
+
+    #wrap dt,
+    #wrap dd {
+      padding-left: 15px;
+      border-bottom: 1px solid #FFF;
+    }
+
+    #wrap dt {
+      cursor: pointer;
+      font-size: 14px;
+      background: #9C0;
+      line-height: 30px;
+      /* 700<=>字体的粗细； 14px/30px<=>font-size/line-height:规定字体尺寸和行高；Tahoma:字体 */
+      font: 700 14px/30px Tahoma;
+    }
+
+    #wrap dt.current {
+      background: #09F;
+    }
+
+    #wrap dd {
+      background: #7CF;
+      line-height: 25px;
+      font: 12px/25px Tahoma;
+    }
+
+    #copyright {
+      color: #999;
+      width: 374px;
+      text-align: right;
+      font: 12px/1.5 Tahoma;
+      margin: 5px auto 0;
+    }
+  </style>
+  <script src="../../src/js/CreateList.js"></script>
+  <script>
+    window.onload = function () {
+      new CreateList([
+        {
+          project: [{
+            text: "第一课"
+          },
+          {
+            text: "控制DIV属性",
+            href: "#"
+          },
+          {
+            text: "网页换肤",
+            href: "#"
+          },
+          {
+            text: "函数接收参数并弹出",
+            href: "#"
+          },
+          {
+            text: "用循环将三个DIV变成红色",
+            href: "#"
+          },
+          {
+            text: "鼠标移入／移出改变样式",
+            href: "#"
+          },
+          {
+            text: "记住密码提示框",
+            href: "#"
+          }]
+        },
+        {
+          project: [{
+            text: "第二课"
+          },
+          {
+            text: "百度输入法",
+            href: "#"
+          }
+          ]
+        }, {
+          project: [{
+            text: "第三课"
+          }, {
+            text: "用typeof查看数据类型",
+            href: "#"
+          }]
+        }
+
+      ]);
+      (function () {
+        var oDiv = document.createElement("div");
+        oDiv.style.width = "384px";
+        oDiv.style.textAlign = "right";
+        oDiv.style.margin = "5px auto 10px";
+        document.body.appendChild(oDiv)
+      })()
+    }
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>

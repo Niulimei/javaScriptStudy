@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-type" content="text/html;charset=utf-8" />
+  <title>控制div属性</title>
+  <style>
+    #outer {
+      width: 500px;
+      margin: 0 auto;
+      padding: 0;
+      text-align: center;
+    }
+
+    #div1 {
+      width: 100px;
+      height: 100px;
+      background: black;
+      margin: 10px auto;
+      display: block;
+    }
+  </style>
+  <script>
+    var changeStyle = function (elem, attr, value) {
+      console.log("changeStyle-elem", elem)
+      console.log("changeStyle-attr", attr)//输出的是属性，比如：with、height、background等，
+      console.log("changeStyle-value", value) //输出的是属性的值，即长宽高为多少
+      elem.style[attr] = value
+    };
+    window.onload = function () {
+      // getElementsByTagName()方法可返回带有指定标签名的对象的集合
+      var oBtn = document.getElementsByTagName("input");
+      console.log("oBtn", oBtn)
+      // getElementById() 方法可返回对拥有指定 ID 的第一个对象的引用。
+      var oDiv = document.getElementById("div1");
+      // attributes属性返回节点的属性集合；您可以使用length属性来确定属性的数量，然后您就能够遍历所有的属性节点并提取您需要的信息。
+      var oAtt = ["width", "height", "background", "display", "display"];
+      var oVal = ["200px", "200px", "red", "none", "block"];
+      for (var i = 0; i < oBtn.length; i++) {
+        //index属性可返回下拉列表中选项的索引位置
+        console.log("--->", oBtn[i])
+        oBtn[i].index = i;
+        oBtn[i].onclick = function () {
+          //cssText这种方法对于create的元素初始化css样式来说很简单方便
+          this.index == oBtn.length - 1 && (oDiv.style.cssText = "");
+          changeStyle(oDiv, oAtt[this.index], oVal[this.index])
+        }
+      }
+    };
+  </script>
+</head>
+
+<body>
+  <div id="outer">
+    <input type="button" value="变宽" />
+    <input type="button" value="变高" />
+    <input type="button" value="变色" />
+    <input type="button" value="隐藏" />
+    <input type="button" value="重置" />
+    <div id="div1"></div>
+  </div>
+</body>
+
+</html>

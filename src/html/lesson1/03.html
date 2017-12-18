@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>函数接收参数并弹出</title>
+</head>
+<html>
+<style>
+  body {
+    margin: 0;
+    padding: 0
+  }
+
+  div {
+    text-align: center;
+    padding-top: 10px;
+  }
+</style>
+<script>
+  //点击button要传两个参数a=“北京市”，b=“朝阳街”
+  var myFn = function (a, b) {
+    alert(a.value);
+    alert(b.value)
+  }
+  window.onload = function () {
+    var oInput = document.getElementsByTagName("input");
+    console.log("oInput", oInput)
+    var oBtn = document.getElementsByTagName("button")[0];
+    console.log("oBtn", oBtn)
+    oBtn.onclick = function () {
+      myFn(oInput[0], oInput[1])
+    }
+  }
+</script>
+
+<body>
+  <div>
+    <input type="text" value="北京市" />
+  </div>
+  <div>
+    <input type="text" value="朝阳街" />
+  </div>
+  <div>
+    <button>传参</button>
+  </div>
+</body>
+
+</html>

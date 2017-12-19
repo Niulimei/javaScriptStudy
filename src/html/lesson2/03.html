@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>求出数组中所有数字的和</title>
+</head>
+<html>
+<style>
+  #outer {
+    width: 500px;
+    margin: 0 auto;
+  }
+
+  .sum {
+    font-size: 30px;
+    color: red;
+  }
+</style>
+<script>
+  window.onload = function () {
+    var oBtn = document.getElementsByTagName("button")[0];
+    var oInput = document.getElementsByTagName("input")[0];
+    var oStrong = document.getElementsByTagName("strong")[0];
+    //.replace(/[^(\d)|(,)]/g, "")：表示除了数字和逗号之外的字符
+    //onkeyup 事件会在键盘按键被松开时发生
+    oInput.onkeyup = function () {
+      this.value = this.value.replace(/[^(\d)|(,)]/g, "")
+    }
+    oBtn.onclick = function () {
+      var sum = 0;
+      var oInput = document.getElementsByTagName("input")[0].value.split(",");
+      for (var i in oInput) {
+        sum += parseInt(oInput[i])
+      }
+      oStrong.innerHTML = sum
+    }
+  }
+</script>
+
+<body>
+  <div id="outer">
+    <input type="text" />
+    <button>求和</button>
+    <span>输入数字求和，数字之间用半角","号分隔</span>
+    <strong class="sum"></strong>
+  </div>
+</body>
+
+</html>

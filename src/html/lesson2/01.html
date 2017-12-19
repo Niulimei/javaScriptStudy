@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>百度输入法</title>
+</head>
+<style>
+  body,
+  ul,
+  li,
+  button {
+    margin: 0;
+    padding: 0;
+  }
+
+  #outer {
+    width: 70px;
+    margin: 10px auto;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  #ime {
+    display: none;
+    margin-top: 5px;
+    background: #fff;
+    border: 1px solid #9a9a9a;
+  }
+
+  #ime li {
+    width: 100%;
+    line-height: 24px;
+    display: inline-block;
+    vertical-align: top;
+  }
+
+  #close {
+    border-top: 1px solid #9a99ff;
+  }
+
+  #ime li a {
+    color: #00c;
+    padding: 0 5px;
+    display: block;
+    text-decoration: none;
+  }
+
+  #ime li a:hover {
+    background: #d9e1f6;
+  }
+</style>
+<script>
+  window.onload = function () {
+    var oBtn = document.getElementsByTagName("button")[0];
+    var oIme = document.getElementById("ime");
+    var oClose = document.getElementById("close");
+    var style = oIme.style;
+    oBtn.onclick = function () {
+      style.display = style.display == "block" ? "none" : "block"
+    };
+    oClose.onclick = function () {
+      style.display = "none";
+    }
+  }
+</script>
+<html>
+
+<body>
+  <div id="outer">
+    <button>输入法</button>
+    <ul id="ime">
+      <!-- javascript是一个伪协议 -->
+      <!-- javascript:是表示在触发<a>默认动作时，执行一段javascript代码，而javascript:;表示什么都不执行，这样点击<a>时就没有任何反应。 -->
+      <!-- href="javascript:;就是去掉a标签的默认行为，跟href=“javascript:void(0)"是一样的 -->
+      <li>
+        <a href="javascript:;">手写</a>
+      </li>
+      <li>
+        <a href="javascript:;">拼音</a>
+      </li>
+      <li id="close">
+        <a href="javascript:;">关闭</a>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>

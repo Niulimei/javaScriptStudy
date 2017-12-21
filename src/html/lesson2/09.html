@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>单一按钮显示／隐藏-播放列表收缩展开</title>
+</head>
+<html>
+<style>
+  body,
+  div,
+  ul,
+  li,
+  h2 {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  body {
+    font: 12px/1.5 Tahoma;
+  }
+
+  #outer {
+    width: 200px;
+    margin: 10px auto;
+    border: 1px solid #aaa;
+  }
+
+  #outer ul {
+    list-style-type: none;
+  }
+
+  #outer li {
+    height: 25px;
+    line-height: 25px;
+    vertical-align: top;
+  }
+
+  #outer a {
+    /* 此元素显示为块级元素，此元素前后会带有换行符 */
+    display: block;
+    text-decoration: none;
+    color: #6b7980;
+    background: #e9edf2;
+    padding: 0 10px;
+  }
+
+  #outer a:hover {
+    background: #fff;
+    text-decoration: underline;
+  }
+
+  #outer h2 {
+    line-height: 30px;
+    height: 30px;
+    font-size: 14px;
+    background: #ced3d7 url(../../../src/images/ico.gif) 180px 15px no-repeat;
+    border-color: #fff #e9edf2;
+  }
+
+  #outer h2.open {
+    background-position: 180px -12px;
+  }
+</style>
+<script>
+  window.onload = function () {
+    //获取
+    var oH2 = document.getElementsByTagName("h2")[0];
+    var oUl = document.getElementsByTagName("ul")[0];
+    oH2.onclick = function () {
+      var style = oUl.style;
+      style.display = style.display == "none" ? "block" : "none";
+      oH2.className = style.display == "none" ? "open" : ""
+    }
+  }
+</script>
+
+<body>
+  <div id="outer">
+    <h2>播放列表...</h2>
+    <ul>
+      <li>
+        <a href="javascript:;">玩家之徒 - 蔡依林</a>
+      </li>
+      <li>
+        <a href="javascript:;">原谅我就是这样的女生 - 戴佩妮</a>
+      </li>
+      <li>
+        <a href="javascript:;">猜不透 - 丁当</a>
+      </li>
+      <li>
+        <a href="javascript:;">自导自演 - 周杰伦</a>
+      </li>
+      <li>
+        <a href="javascript:;">浪漫窝 - 弦子</a>
+      </li>
+      <li>
+        <a href="javascript:;">流年 - 王菲</a>
+      </li>
+    </ul>
+  </div>
+</body>
+
+</html>

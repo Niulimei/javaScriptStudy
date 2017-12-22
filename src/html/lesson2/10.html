@@ -37,7 +37,6 @@
     }
 
     #outer ul {
-      /* overflow: hidden; */
       zoom: 1
     }
 
@@ -46,6 +45,8 @@
       而不论该元素本身是什么类型。相对定位元素会相对于它在正常流中的默认位置偏移 */
       position: relative;
       list-style-type: none;
+      /* 使得ul中的所有li元素放置在一条水平线上（除此之外，还可以使用display:inline使得元素在一条水平线上，但是，没有float:left表现方式要好），但使用float:left后需要clear:both清空(除)浮动  */
+      /* 当我们使用float:left后，发现“父级(这里的父级是ul)”元素的div没有被撑开了，通常情况下要清理浮动 */
       float: left;
       border: 1px solid #333;
       margin: 10px 10px 0 0;
@@ -60,6 +61,12 @@
       padding: 10px;
       background: #f0f0f0;
     }
+
+    /* after伪类清除浮动；重点是clear:both （参考How To Clear Floats Without Structural Markup文章）*/
+
+    /* 这个css的原理是经过使用after伪类对象，它将在应用ul的元素结尾添加content中的内容，也就是一个“.”，并且
+    把设置为块级元素（display:block）高度设置为0，clear="both",然后将其内容隐藏掉(visibility=“hindden”)。
+    这样就会撑开此块级元素。但是，IE并不支持，所以如果你需要兼容IE浏览器的话，可以设定一个hack */
 
     #outer ul:after {
       content: ".";

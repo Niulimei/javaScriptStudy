@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>鼠标移过，修改图片路径</title>
+  <style>
+    body,
+    ul,
+    li {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: black;
+    }
+
+    img {
+      border: 0;
+      border-radius: 3px;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    #outer {
+      width: 212px;
+      overflow: hidden;
+      background: #fff;
+      margin: 10px auto;
+      padding: 0 0 3px 3px;
+      border-radius: 5px;
+      border: 5px solid #fff;
+    }
+
+    #outer li {
+      margin: 3px 3px 0 0;
+    }
+
+    #outer li.first,
+    #outer li.first img {
+      width: 156px;
+      height: 156px;
+    }
+
+    #outer ul li.first {
+      position: relative;
+
+    }
+
+    #outer li,
+    #outer li img {
+      float: left;
+      width: 50px;
+      height: 50px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var oImg = document.getElementById("outer").getElementsByTagName("img");
+      for (var i = 1; i < oImg.length; i++) {
+        oImg[i].onmouseover = function () {
+          //创建一个Image对象：var a = new Image(); 定义Image对象的src:a.src="xxx.gif";这样就相当于给浏览器缓存了一张图片。
+          var img = new Image();
+          // 将A替换成B replace(/B/,"A")
+          img.src = oImg[0].src = this.src.replace(/small/, "big")
+          // complete属性可返回浏览器是否已完成对图像的加载。返回false或者true
+          // img.complete ? oImg.style.display = "none" : (oImg[0].onload = function () {
+          //   oImg.style.display = "none"
+          // })
+        }
+      }
+    }
+  </script>
+  <html>
+
+  <body>
+    <ul id="outer">
+      <li class="first">
+        <img src="../../../src/images/big_1.jpg">
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_1.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_2.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_3.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_4.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_5.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_6.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_7.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_8.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_9.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_10.jpg">
+        </a>
+      </li>
+      <li>
+        <a href="javascript:;">
+          <img src="../../../src/images/small_11.jpg">
+        </a>
+      </li>
+    </ul>
+  </body>
+
+  </html>

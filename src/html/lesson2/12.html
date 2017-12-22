@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>复选框（checkbox）全选／全不选／反选</title>
+  <style>
+    body,
+    dl,
+    dt,
+    dd {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font: 12px/1.5 Tahoma;
+    }
+
+    dl {
+      width: 120px;
+      border: 1px solid black;
+      margin: 10px auto;
+      text-align: center;
+      background: #fafafa;
+      border-radius: 5px;
+      padding: 10px 5px;
+    }
+
+    dt {
+      border-bottom: 1px solid black;
+      padding-bottom: 10px;
+    }
+  </style>
+  <!-- 点击全选将各个选项都选中：
+  思路：点击“全选”for()遍历各个选项，并将其状态设为checked
+  -->
+
+  <script>
+    window.onload = function () {
+      var oInput = document.getElementsByTagName("input");
+      var oLabel = document.getElementsByTagName("label")[0];
+      var oA = document.getElementsByTagName("a")[0];
+      var isCheckAll = function () {
+        for (var i = 1, n = 0; i < oInput.length; i++) {
+          oInput[i].checked && n++
+        }
+        // i=1,n=0;i<oInput.length==>i从1到oInput.length,一共(oInput.length-1)个所以后来会出现n==oInput.length-1
+        //判断是否相等；oInput[i].checked && n++,如果oInput[i]这个选中了，那么就执行n++；也就是说所有的oInput[i]都选中了，
+        // n==oInput.length-1，这个才会成立。
+        // oInput[0].checked = n == oInput.length - 1;====>当第一个（全选）被选中后和n==oInput.length-1相等
+        oInput[0].checked = n == oInput.length - 1;
+        //当为全选的状态时显示“不全选”
+        oLabel.innerHTML = oInput[0].checked ? "全不选" : "全选"
+      };
+      // 全选／全不选
+      // 点击第oInput[0]时表示全选
+      oInput[0].onclick = function () {
+        for (var i = 1; i < oInput.length; i++) {
+          oInput[i].checked = this.checked;
+        }
+        isCheckAll()
+      }
+      // 反选
+      oA.onclick = function () {
+        for (var i = 1; i < oInput.length; i++) {
+          oInput[i].checked = !oInput[i].checked
+        }
+        isCheckAll()
+      }
+      // 根据复选个数更新全选状态
+      for (var i = 1; i < oInput.length; i++) {
+        oInput[i].onclick = function () {
+          isCheckAll()
+        }
+      }
+    }
+  </script>
+</head>
+<html>
+
+<body>
+  <dl>
+    <dt>
+      <input type="checkbox" id="checkAll" />
+      <label>全选</label>
+      <a href="javascript:;">反选</a>
+    </dt>
+    <dd>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（一）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（二）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（三）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（四）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（五）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（六）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（七）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（八）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（九）</label>
+      </p>
+      <p>
+        <input type="checkbox" name="item" />
+        <label>选项（十）</label>
+      </p>
+    </dd>
+  </dl>
+</body>
+
+</html>

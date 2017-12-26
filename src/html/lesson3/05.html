@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>页面加载后累加，自加1</title>
+  <style>
+    body {
+      text-align: center;
+      font: 700 30px/1.5 arial;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var oBody = document.body;
+      var i = 0;
+      //写法一：
+      // setInterval(updateNum, 1000);
+      // updateNum();
+      // function updateNum() {
+      //   oBody.innerHTML = ++i;
+      // }
+      // 写法二：
+      setInterval(updateNum => {
+        oBody.innerHTML = ++i;
+      }, 1000)
+    }
+  </script>
+</head>
+<html>
+
+<body>
+
+</body>
+
+</html>

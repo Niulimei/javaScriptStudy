@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>输入两个数字，比较大小</title>
+  <style>
+    body {
+      text-align: center
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var aInput = document.getElementsByTagName("input");
+      var aSpan = document.getElementsByTagName("span")[0];
+      var i = 0;
+      aInput[0].onkeyup = function () {
+        this.value = this.value.replace(/[^\d]/, "")
+      }
+      aInput[1].onclick = function () {
+        // /^\d{2}$/：表示两位数的数字
+        (aInput[0].value == "") ? alert("请输入数字！") : alert(/^\d{2}$/.test(parseInt(aInput[0].value)) ? "是两位数字" : "这是" + aInput[0].value.length + "位数");
+      }
+    }
+  </script>
+</head>
+<html>
+
+<body>
+  <input type="text" />
+  <input type="button" value="是否为两位数" />
+</body>
+
+</html>

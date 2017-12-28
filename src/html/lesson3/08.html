@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>简易网页时钟</title>
+  <style>
+    body,
+    span,
+    div {
+      margin: 0;
+      padding: 0
+    }
+
+    body {
+      color: #fff;
+      font: 16px/1.5 \5fae\8f6f\96c5\9ed1;
+    }
+
+    #outer {
+      width: 300px;
+      background: #1a1a1a;
+      text-align: center;
+      margin: 10px auto;
+      padding: 20px 0;
+    }
+
+    span {
+      color: #000;
+      line-height: 2;
+      width: 80px;
+      background: #fbfbfb;
+      border: 2px solid #b4b4b4;
+      margin: 0 10px;
+      padding: 0 15px;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var oClock = document.getElementById("outer");
+      var aSpan = oClock.getElementsByTagName("span");
+      setInterval(() => {
+        var oDate = new Date();
+        var aDate = [oDate.getHours(), oDate.getMinutes(), oDate.getSeconds()];
+        for (var i in aDate) aSpan[i].innerHTML = format(aDate[i])
+        // console.log("date", oDate)
+      }, 1000)
+      function format(a) {
+        //replace(/^(\d)$/,"0$1"):如果a是1个数字，转换成2位数，前面以0补充
+        // "/^(\d)$/": ^ 表示：开始位置；(\d)表示：一位数字 $表示：结束位置
+        return a.toString().replace(/^(\d)$/, "0$1")
+      }
+    }
+  </script>
+</head>
+<html>
+
+<body>
+  <div id="outer">
+    <span></span>点
+    <span></span>分
+    <span></span>秒
+  </div>
+
+</body>
+
+</html>

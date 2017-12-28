@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>简易计算器</title>
+  <style>
+    body,
+    div,
+    p,
+    ul,
+    li,
+    input {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      /* outline:设置4个边框的样式 ；outline（轮廓）是绘制于元素周围的一条线，位于边框边缘的外围，可起到突出元素的作用*/
+      outline: none;
+    }
+
+    body {
+      font: 700 24px/1.5 Arial;
+    }
+
+    #calc {
+      /* position: relative; */
+      width: 300px;
+      background: #000;
+      margin: 10px auto;
+
+    }
+
+    #calc p {
+      color: #fff;
+      text-align: right;
+      font: 12px/20px Arial;
+      padding: 0 5px;
+    }
+
+    #calc .f-text {
+      border: 0;
+      width: 290px;
+      height: 84px;
+      text-align: right;
+      font: 700 50px/84px Arial;
+      background: url(../../../src/images/inputBg.jpg) repeat-x;
+      padding: 0 5px;
+    }
+
+    #calc ul {
+      position: relative;
+      overflow: hidden;
+      zoom: 1;
+      background: url(../../../src/images/bg.jpg);
+      padding: 0 0 17px 8px;
+    }
+
+    #calc ul li {
+      float: left;
+      width: 63px;
+      height: 41px;
+      margin: 17px 10px 0 0;
+    }
+
+    #calc ul li a {
+      display: block;
+      width: 63px;
+      height: 41px;
+      line-height: 41px;
+      text-align: center;
+      background: url(../../../src/images/btn.png) no-repeat;
+    }
+
+    #calc ul li a:hover {
+      background-position: -63px 0;
+    }
+
+    #calc ul li.btn-1 a {
+      background-position: 0 -41px;
+    }
+
+    #calc ul li.btn-1 a:hover {
+      background-position: -63px -41px;
+    }
+
+    #calc ul li.btn-2 {
+      position: absolute;
+      top: 174px;
+      right: 0;
+      height: 99px;
+    }
+
+    #calc ul li.btn-2 a {
+      height: 99px;
+      line-height: 99px;
+      background-position: 0 -164px;
+    }
+
+    #calc ul li.btn-2 a:hover {
+      background-position: -63px -164px;
+    }
+
+    #calc ul li.btn-3 {
+      width: 136px;
+    }
+
+    #calc ul li.btn-3 a {
+      width: 136px;
+      background-position: 0 -82px;
+    }
+
+    #calc ul li.btn-3 a:hover {
+      background-position: 0 -123px;
+    }
+
+    #formula {
+      position: absolute;
+      top: 30px;
+      background: none;
+      border: 0;
+      font: 700 12px/1.5 Arial;
+      width: 280px;
+      padding: 3px 15px 0 5px;
+      text-align: right;
+    }
+  </style>
+  <script>
+    window.onload = function () {
+      var oCalc = document.getElementById("calc");
+      var aA = oCalc.getElementsByTagName("a");
+      var aInput = oCalc.getElementsByTagName("input")[0];
+      var oFormula = document.getElementById("formula");
+      var s = false;
+      var i = 0;
+      for (i = 0; i < aA.length; i++) {
+        aA[i].onfocus = function () {
+          this.blur()
+        };
+        aA[i].onclick = function () {
+          switch (this.innerHTML) {
+            case "c": aInput.value = 0;
+              oFormula.value = "";
+              break;
+            case "%": count("%")
+              break;
+            case "÷": count("/")
+              break;
+            case "×": count("*")
+              break;
+            case "-": count("-")
+              break;
+            case "+": count("+")
+              break;
+            case "=":
+              s || (oFormula.value += aInput.value);
+              console.log("oFoemula.value", oFormula.value)//输入7-6 输出的是 7-6
+              // eval()函数可计算某个字符串，并执行其中的JavaScript代码。
+              // replace()返回值是，用“”替换了前面表达式的第一次匹配或所有匹配之后得到的。
+              aInput.value = eval(oFormula.value.replace(/\%\/\*\-\+/, ""));
+              console.log("eval6666", eval(oFormula.value.replace(/\%\/\*\-\+/, "")))
+              console.log("eval", aInput.value)
+              // substr(start,length)方法可在字符串中抽取从start下标开始的指定数目的字符
+              aInput.value = aInput.value.substr(0, 10).replace("NaN", 0);
+              s = true;
+              break;
+            case ".":
+              //search()方法用于检索字符串中指定的子字符串，或检索与正则表达式相匹配的子字符串，如果没有找到则返回-1；
+              //此处不等于-1，则表明找到了
+              if (aInput.value.search(/[\.\%\/\*\-\+]/) != -1)
+                break;
+            default:
+              s && (aInput.value = 0, oFormula.value = "", s = false);
+              // $1、$2、...、$99	与 regexp 中的第 1 到第 99 个子表达式相匹配的文本。
+              aInput.value.length < 10 && (aInput.value = (aInput.value + this.innerHTML).replace(/^[0\%\/\*\-\+](\d)/, "$1"));
+          }
+        }
+      }
+      //计算器的显示：输入框的上面显示：（1）formula显示的是表达式（2）f-text显示的是按钮上的数字
+      //第一步：定义一个count函数用来用来计算，将点击的数作为参数传入函数进行计算
+      function count(a) {
+        //s为true的时候，表明aInout中的值是上次的运算结果，直接点击传入的操作符
+        if (s) {
+          oFormula.value = aInput.value + a;
+          console.log("ssss", oFormula.value)
+          aInput.value = a;
+          s = false;
+        } else {
+          /[\%\/\*\-\+]$/.test(aInput.value) || (oFormula.value += aInput.value);
+          aInput.value = a;
+          /[\%\/\*\-\+]$/.test(oFormula.value) || (oFormula.value += aInput.value);
+          // slice(-1)：可以从已有的数组中返回选定的元素，这里是-1，是指最后一个元素，如果是-2的话，是指倒数第二个元素，一次类推
+          oFormula.value = oFormula.value.slice(-1) != a ? oFormula.value.replace(/.$/, a) : oFormula.value
+        }
+      }
+    }
+  </script>
+</head>
+<html>
+
+<body>
+  <div id="calc">
+    <p>By - NiuLimei</p>
+    <input class="f-text" type="text" value="0" readonly="readonly" maxlength="9" />
+    <ul>
+      <li class="btn-1">
+        <a href="javascript:void(0)">c</a>
+      </li>
+      <li class="btn-1">
+        <a href="javascript:void(0)">%</a>
+      </li>
+      <li class="btn-1">
+        <a href="javascript:void(0)">÷</a>
+      </li>
+      <li class="btn-1">
+        <a href="javascript:void(0)">×</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">7</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">8</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">9</a>
+      </li>
+      <li class="btn-1">
+        <a href="javascript:void(0)">-</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">4</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">5</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">6</a>
+      </li>
+      <li class="btn-1">
+        <a href="javascript:void(0)">+</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">1</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">2</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">3</a>
+      </li>
+      <li class="btn-2">
+        <a href="javascript:void(0)">=</a>
+      </li>
+      <li class="btn-3">
+        <a href="javascript:void(0)">0</a>
+      </li>
+      <li>
+        <a href="javascript:void(0)">.</a>
+      </li>
+    </ul>
+    <input id="formula" type="text" readonly="readonly" value="" />
+  </div>
+</body>
+
+</html>
